@@ -1,0 +1,110 @@
+{% extends 'core/base.html' %}
+
+{% block title %} EV List {% endblock title %}
+
+{% block container %}
+<div class="container w-75">
+    <div class="d-flex justify-content-end">
+        <a href="{% url 'ev_add' %}" class="btn btn-success w-25 mx-auto mt-1 mb-3">Add EV</a>
+    </div>
+    <form method="get" action="{% url 'ev_list' %}">
+
+        <div class="form-row">
+            <div class="row mx-auto">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Name</label>
+                    {{ form.name }}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Manufacturer</label>
+                    {{ form.manufacturer }}
+                </div>
+            </div>
+        </div>    
+            
+        <div class="form-row mt-3">
+            <div class="row mx-auto">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Min. Battery Size</label>
+                    {{ form.min_battery_size }}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Max. Battery Size</label>
+                    {{ form.max_battery_size }}
+                </div>
+            </div>
+        </div>   
+        
+        <div class="form-row mt-3">
+            <div class="row mx-auto">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Min. WLTP Range</label>
+                    {{ form.min_wltp_range }}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Max. WLTP Range</label>
+                    {{ form.max_wltp_range }}
+                </div>
+            </div>
+        </div>   
+        
+        <div class="form-row mt-3">
+            <div class="row mx-auto">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Min. Cost</label>
+                    {{ form.min_cost }}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Max. Cost</label>
+                    {{ form.max_cost }}
+                </div>
+            </div>
+        </div>   
+                
+        <div class="form-row mt-3">
+            <div class="row mx-auto">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Min. Power</label>
+                    {{ form.min_power }}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Max. Power</label>
+                    {{ form.max_power }}
+                </div>
+            </div>
+        </div>
+
+         <div class="d-flex justify-content-end">
+            <button class="btn btn-primary w-50 mx-auto mt-3 mb-3" type="submit">Search</button>
+        </div>
+        
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Manufacturer</th>
+                <th scope="col" class="text-center">Battery Size</th>
+                <th scope="col" class="text-center">WLTP Range</th>
+                <th scope="col" class="text-center">Cost</th>
+                <th scope="col" class="text-center">Power</th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for ev in EVs %}
+            <tr>
+                <th scope="row" class="text-center">{{ ev.id }}</th>
+                <td class="text-center"><a href="{% url 'ev_details' id=ev.pk %}">{{ ev.name }}</a></td>
+                <td class="text-center">{{ ev.manufacturer }}</td>
+                <td class="text-center">{{ ev.battery_size }}</td>
+                <td class="text-center">{{ ev.wltp_range }}</td>
+                <td class="text-center">{{ ev.cost }}</td>
+                <td class="text-center">{{ ev.power }}</td>
+            </tr>
+        {% endfor%}
+    </tbody>
+    </table>
+</div>
+{% endblock container %}

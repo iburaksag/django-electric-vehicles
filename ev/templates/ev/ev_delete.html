@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Delete EV {% endblock title %}
+
+{% block container %}
+
+<h1>Delete {{ ev.name }}</h1>
+
+<p>Are you sure you want to delete {{ ev.name }}?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+    <a href="{% url 'ev_details' id=ev.id %}">Cancel</a>
+</form>
+
+{% endblock container %}
