@@ -92,19 +92,19 @@
                 <th scope="col" class="text-center">Power</th>
             </tr>
         </thead>
-    <tbody>
-        {% for ev in EVs %}
-            <tr>
-                <th scope="row" class="text-center">{{ ev.id }}</th>
-                <td class="text-center"><a href="{% url 'ev_details' id=ev.pk %}">{{ ev.name }}</a></td>
-                <td class="text-center">{{ ev.manufacturer }}</td>
-                <td class="text-center">{{ ev.battery_size }}</td>
-                <td class="text-center">{{ ev.wltp_range }}</td>
-                <td class="text-center">{{ ev.cost }}</td>
-                <td class="text-center">{{ ev.power }}</td>
-            </tr>
-        {% endfor%}
-    </tbody>
+        <tbody>
+            {% for ev in EVs %}
+                <tr>
+                    <th scope="row" class="text-center">{{ ev.id }}</th>
+                    <td class="text-center"><a href="{% url 'ev_details' id=ev.pk %}">{{ ev.name }}</a></td>
+                    <td class="text-center">{{ ev.manufacturer }}</td>
+                    <td class="text-center">{{ ev.battery_size }}</td>
+                    <td class="text-center">{{ ev.wltp_range }}</td>
+                    <td class="text-center">{{ ev.cost }}</td>
+                    <td class="text-center">{{ ev.power }}</td>
+                </tr>
+            {% endfor%}
+        </tbody>
     </table>
 </div>
 {% endblock container %}

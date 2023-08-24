@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% block title %} EV Comparison Result {% endblock title %}
+
+{% block container %}
+
+<style>
+    .highest {
+        color: green!important;
+    }
+
+    .lowest {
+        color: red!important;
+    }
+</style>
+
+<div class="container w-75">
+<h1 class="mt-3">Comparing {{ ev1.name }} and {{ ev2.name }}</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col" class="text-center">{{ ev1.name }}</th>
+                <th scope="col" class="text-center">{{ ev2.name }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in comparison_data %}
+                <tr>
+                    <th class="text-center">{{ data.attribute }}</th>
+                    {% if data.attribute == 'cost' %}    
+                        <td class="{% if data.ev1_value == data.highest_value %}lowest{% elif data.ev1_value == data.lowest_value %}highest{% endif %} text-center">{{ data.ev1_value }}</td>
+                        <td class="{% if data.ev2_value == data.highest_value %}lowest{% elif data.ev2_value == data.lowest_value %}highest{% endif %} text-center">{{ data.ev2_value }}</td>
+                    {% else %}
+                        <td class="{% if data.ev1_value == data.highest_value %}highest{% elif data.ev1_value == data.lowest_value %}lowest{% endif %} text-center">{{ data.ev1_value }}</td>
+                        <td class="{% if data.ev2_value == data.highest_value %}highest{% elif data.ev2_value == data.lowest_value %}lowest{% endif %} text-center">{{ data.ev2_value }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor%}
+        </tbody>
+    </table>
+</div>    
+
+{% endblock container %}

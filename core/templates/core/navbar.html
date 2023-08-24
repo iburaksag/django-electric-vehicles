@@ -14,24 +14,14 @@
         </div>
         <div id="navbarMenu" class="navbar-menu">
           <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="control has-icons-left">
-                  <input
-                    class="input is-rounded"
-                    name="query"
-                    type="text"
-                    placeholder="Search"
-                  />
-                  <span class="icon is-left">
-                    <i class="fa fa-search"></i>
-                  </span>
-                </div>
-            </div>
             <a href="/" class="navbar-item is-active is-size-5 has-text-weight-semibold">
               Home
             </a>
             <a href="{% url 'ev_list' %}" class="navbar-item is-active is-size-5 has-text-weight-semibold">
-              Electric Vehicles
+              EV List
+            </a>
+            <a href="{% url 'ev_compare' %}" class="navbar-item is-active is-size-5 has-text-weight-semibold">
+              Compare EV
             </a>
 
             {% if user.is_authenticated %}

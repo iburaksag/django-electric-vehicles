@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
-
+from django.contrib import messages
 from .forms import EVDetailForm, EVSearchForm
 from .models import EV
 
@@ -101,3 +101,48 @@ def ev_add_view(request):
     
     context = {'form': form}
     return render(request, 'ev/ev_add.html', context)
+
+
+
+def ev_compare_view(request):
+    evs = EV.objects.all()
+    context = {'evs': evs}
+    return render(request, 'ev/ev_compare.html', context)
+
+
+def ev_comparison_result_view(request):
+    ev1_id = request.GET.get('ev1')
+    ev2_id = request.GET.get('ev2')
+    
+    if(ev1_id == ev2_id):
+        messages.error(request, 'Please choose two different electric vehicles!')
+        return redirect('ev_compare')
+
+    ev1 = EV.objects.get(pk=ev1_id)
+    ev2 = EV.objects.get(pk=ev2_id)
+    
+    attributes = ['battery_size', 'wltp_range', 'cost', 'power']
+    comparison_data = []
+    
+    for attr in attributes:
+        ev1_value = getattr(ev1, attr)
+        ev2_value = getattr(ev2, attr)
+        
+        highest_value = max(ev1_value, ev2_value)
+        lowest_value = min(ev1_value, ev2_value)
+        
+        comparison_data.append({
+            'attribute': attr,
+            'ev1_value': ev1_value,
+            'ev2_value': ev2_value,
+            'highest_value': highest_value,
+            'lowest_value': lowest_value,
+        })
+    
+
+    context = {
+        'ev1': ev1,
+        'ev2': ev2,
+        'comparison_data': comparison_data,
+    }
+    return render(request, 'ev/ev_comparison_result.html', context)
