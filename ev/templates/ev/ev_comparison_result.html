@@ -20,8 +20,8 @@
         <thead>
             <tr>
                 <th scope="col"></th>
-                <th scope="col" class="text-center">{{ ev1.name }}</th>
-                <th scope="col" class="text-center">{{ ev2.name }}</th>
+                <th scope="col" class="text-center"><a href="{% url 'ev_details' id=ev1.id %}">{{ ev1.name }}</a></th>
+                <th scope="col" class="text-center"><a href="{% url 'ev_details' id=ev2.id %}">{{ ev2.name }}</a></th>
             </tr>
         </thead>
         <tbody>

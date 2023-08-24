@@ -3,7 +3,6 @@
 {% block title %} EV | Add EV {% endblock %}
 
 {% block container %}
-<div class="container w-75">
     <form method="post">
         {% csrf_token %}
 
@@ -50,5 +49,4 @@
             <button type="submit" class="btn btn-success w-50 mx-auto mt-3 mb-3">Add EV</button>
         </div>
     </form>
-</div> 
 {% endblock container %}
