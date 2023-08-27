@@ -23,7 +23,7 @@ I will be quite limited in the types of queries you can run against the database
 ### • Group 3 tasks
 9. On EV comparison page for each attribute highest value should be highlighted green and lowest red. Opposite for cost.
 10. On EV comparison page EV names should be hyperlinks to information page.
-11. Add in the ability for a logged in user to submit a review of an EV including a text field (limited to 1,000 characters) and a rating out of 10.
+11. Add in the ability for a logged in user to submit a review of an EV including a text field and a rating out of 10.
 12. The reviews should be visible to all users even if logged out
 ### • Group 4 tasks 
 13. On the information page for an EV this should show the average score of all reviews.
