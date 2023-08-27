@@ -3,6 +3,15 @@
 {% block title %} EV | Add EV {% endblock %}
 
 {% block container %}
+    {% if messages %}
+        <div class="error-messages alert alert-warning alert-dismissible fade show mt-3 mb-3" role="alert">
+            {% for message in messages %}
+                <p class="error">{{ message }}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            {% endfor %}
+        </div>        
+    {% endif %}
+    
     <form method="post">
         {% csrf_token %}
 

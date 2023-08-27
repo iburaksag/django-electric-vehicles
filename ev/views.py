@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.db.models import Avg
@@ -58,6 +59,7 @@ def ev_list_view(request):
     return render(request, 'ev/ev_list.html', context)
 
 
+@login_required(login_url = '/login/')
 def ev_details_view(request, id):
     ev = get_object_or_404(EV, pk=id)
     
@@ -95,6 +97,7 @@ def ev_details_view(request, id):
     return render(request, 'ev/ev_details.html', context)
 
 
+@login_required(login_url = '/login/')
 def ev_delete_view(request, id):
     ev = get_object_or_404(EV, id=id)
     
@@ -107,13 +110,23 @@ def ev_delete_view(request, id):
     return render(request, 'ev/ev_delete.html', context)
 
 
+@login_required(login_url = '/login/')
 def ev_add_view(request):
     if request.method == 'POST':
         form = EVDetailForm(request.POST)
         if form.is_valid():
-            form.save()
-            
-            return redirect('ev_list')  
+            manufacturer = form.cleaned_data['manufacturer']
+            name = form.cleaned_data['name']
+
+            # Checking if an EV with the same manufacturer, name, and year exists
+            existing_ev = EV.objects.filter(manufacturer=manufacturer, name=name).first()
+
+            if existing_ev:
+                messages.error(request, 'The EV already exists.')
+            else:
+                form.save()
+                messages.success(request, 'EV created successfully.')
+                return redirect('ev_list')
     else:
         form = EVDetailForm()
     
