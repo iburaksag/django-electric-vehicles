@@ -1,6 +1,6 @@
 # Django EV-Database Web Application
 
-I will be quite limited in the types of queries you can run against the database, so you will need to think very carefully about how you structure and store your data to facilitate querying. In this project, the types of queries that can be run against the database were quite limited. The Python Django framework was used to develop the project and the following coding tasks were performed.
+In this assignment I will be tasked with building your first an application which will be a database of Electric Vehicles. I will be required to deal with users who login and logout and alter the functionality for each. In the application, users should be able to add and update cars that are in the database. They should also be able to perform comparisons of multiple cars in the database. In this project, the types of queries that can be run against the database were quite limited. The Python Django framework was used to develop the project and the following coding tasks were performed.
 
 
 ## Coding Tasks
