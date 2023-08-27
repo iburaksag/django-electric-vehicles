@@ -1,4 +1,4 @@
-# django-electric-vehicles
+# Django EV-Database Web Application
 
 I will be quite limited in the types of queries you can run against the database, so you will need to think very carefully about how you structure and store your data to facilitate querying. In this project, the types of queries that can be run against the database were quite limited. The Python Django framework was used to develop the project and the following coding tasks were performed.
 
