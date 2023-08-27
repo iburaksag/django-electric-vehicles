@@ -53,7 +53,10 @@
     </form>
 
     <div class="text-center mt-5">
-        <h2 class="mb-5">Reviews</h2>
+        {% if reviews %}
+            <h2 class="mb-5">Reviews ({{ avg_reviews|default:"Not available"|floatformat:2 }}/10)</h2>
+        {% endif%}
+
         {% for review in reviews %}
             <div class="w-75 mx-auto rounded" style="background: whitesmoke; padding:1rem;">
                 <strong><p>{{ review.user }}</p></strong>

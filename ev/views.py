@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
+from django.db.models import Avg
 from .forms import EVDetailForm, EVSearchForm, EVReviewForm
 from .models import EV, EVReview
 
@@ -75,17 +76,21 @@ def ev_details_view(request, id):
             review.ev = ev
             review.save()
 
+            # Re-create the EV details form with the updated instance after submitting a review
+            form = EVDetailForm(instance=ev)
     else:
         form = EVDetailForm(instance=ev)
         review_form = EVReviewForm()
 
     reviews = ev.evreview_set.all().order_by('-created_at') 
+    avg_reviews = ev.evreview_set.aggregate(Avg('rating'))['rating__avg']
 
     context = {
         'ev': ev,
         'form': form,
         'review_form' : review_form,
         'reviews' : reviews,
+        'avg_reviews' : avg_reviews,
     }
     return render(request, 'ev/ev_details.html', context)
 
@@ -151,7 +156,6 @@ def ev_comparison_result_view(request):
             'highest_value': highest_value,
             'lowest_value': lowest_value,
         })
-    
 
     context = {
         'ev1': ev1,
