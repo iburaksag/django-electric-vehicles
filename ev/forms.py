@@ -1,5 +1,5 @@
 from django import forms
-from .models import EV
+from .models import EV, EVReview
 
 
 class EVSearchForm(forms.Form):
@@ -15,6 +15,7 @@ class EVSearchForm(forms.Form):
     max_power = forms.IntegerField(required=False, widget=forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Max.' }))
 
 
+
 class EVDetailForm(forms.ModelForm):
     class Meta:
         model = EV
@@ -25,3 +26,14 @@ class EVDetailForm(forms.ModelForm):
 
         for field_name in self.fields:
             self.fields[field_name].widget.attrs['class'] = 'form-control'
+
+
+
+class EVReviewForm(forms.ModelForm):
+    class Meta:
+        model = EVReview
+        fields = ['review_text', 'rating']
+        widgets = {
+            'review_text': forms.Textarea(attrs={'class': 'form-control mb-3'}),
+            'rating': forms.NumberInput(attrs={'class': 'form-control mb-4'}),
+        }        

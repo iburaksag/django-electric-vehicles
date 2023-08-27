@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
-from .forms import EVDetailForm, EVSearchForm
-from .models import EV
+from .forms import EVDetailForm, EVSearchForm, EVReviewForm
+from .models import EV, EVReview
 
 
 def ev_list_view(request):
@@ -62,17 +62,30 @@ def ev_details_view(request, id):
     
     if request.method == 'POST':
         form = EVDetailForm(request.POST, instance=ev)
+        review_form = EVReviewForm(request.POST)
         
         if form.is_valid():
             form.save()
         
             return redirect('ev_list')
+        
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.ev = ev
+            review.save()
+
     else:
         form = EVDetailForm(instance=ev)
+        review_form = EVReviewForm()
+
+    reviews = ev.evreview_set.all().order_by('-created_at') 
 
     context = {
         'ev': ev,
         'form': form,
+        'review_form' : review_form,
+        'reviews' : reviews,
     }
     return render(request, 'ev/ev_details.html', context)
 

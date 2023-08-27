@@ -51,6 +51,39 @@
             <a href="{% url 'ev_delete' id=ev.id %}" class="btn btn-danger btn-md">Delete</a>
         </div>
     </form>
+
+    <div class="text-center mt-5">
+        <h2 class="mb-5">Reviews</h2>
+        {% for review in reviews %}
+            <div class="w-75 mx-auto rounded" style="background: whitesmoke; padding:1rem;">
+                <strong><p>{{ review.user }}</p></strong>
+                <p>{{ review.review_text }}</p>
+                <strong><p>Rating: {{ review.rating }}</p></strong>
+            </div>    
+        {% endfor %}
+    </div>
+
+    {% if user.is_authenticated %}
+        <h2 class="text-center">Submit a Review</h2>
+        <div class="w-75 mx-auto rounded" style="background: whitesmoke; padding:1.6rem;">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-row mt-3">
+                        <div class="form-group">
+                            <label for="">Review Text</label>
+                            {{ review_form.review_text }}
+                        </div>
+                        <div class="form-group">
+                            <label for="">Rating</label>
+                            {{ review_form.rating }}
+                        </div>
+                </div>   
+                <button type="submit" class="btn btn-info btn-md">Submit Review</button>
+            </form>
+        </div>    
+
+    {% endif %}
+
 </div>
 
 {% endblock %}
