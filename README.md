@@ -30,3 +30,34 @@ I will be quite limited in the types of queries you can run against the database
 14. On the information page for an EV the reviews should be shown in reverse chronological order.
 15. On the comparison page for EVs the average score should be added in and highlighted green if highest and red if lowest.
 16. UI Design: well thoughout UI design that is intuitive and easy to use.
+
+## Setup
+
+The first thing to do is to clone the repository:
+
+```sh
+$ git clone https://github.com/iburaksag/django-electric-vehicles.git
+$ cd django-electric-vehicles
+```
+
+Create a virtual environment to install dependencies in and activate it:
+
+```sh
+$ virtualenv venv_django-electric-vehicles
+$ source env/bin/activate
+```
+
+Then install the dependencies:
+
+```sh
+(env)$ pip install -r requirements.txt
+```
+Note the `(env)` in front of the prompt. This indicates that this terminal
+session operates in a virtual environment set up by `virtualenv`.
+
+Once `pip` has finished downloading the dependencies:
+```sh
+(env)$ cd project
+(env)$ python manage.py runserver
+```
+And navigate to `http://127.0.0.1:8000/`.
